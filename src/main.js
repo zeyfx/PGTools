@@ -25,8 +25,18 @@ function smoothScrollTo(selector) {
 }
 
 async function navigate(path) {
+  const base = import.meta.env.BASE_URL;
+  
+  // Normalize path by stripping the base URL if present
+  let normalizedPath = path;
+  if (base !== '/' && normalizedPath.startsWith(base)) {
+    normalizedPath = '/' + normalizedPath.slice(base.length);
+  } else if (base !== '/' && normalizedPath + '/' === base) {
+    normalizedPath = '/';
+  }
+
   // Normalise trailing slash
-  const key = path === '/' ? '/' : path.replace(/\/$/, '');
+  const key = normalizedPath === '/' ? '/' : normalizedPath.replace(/\/$/, '');
   const loader = ROUTES[key] || ROUTES['/'];
 
   // Cleanup previous page
@@ -113,8 +123,16 @@ document.addEventListener('click', (e) => {
   }
 
   // SPA route link — must have data-route or point to a known route
+  const base = import.meta.env.BASE_URL;
+  let normalizedPath = url.pathname;
+  if (base !== '/' && normalizedPath.startsWith(base)) {
+    normalizedPath = '/' + normalizedPath.slice(base.length);
+  } else if (base !== '/' && normalizedPath + '/' === base) {
+    normalizedPath = '/';
+  }
+
   const hasDataRoute = a.hasAttribute('data-route');
-  const isKnownRoute = Object.keys(ROUTES).includes(url.pathname);
+  const isKnownRoute = Object.keys(ROUTES).includes(normalizedPath);
   if (!hasDataRoute && !isKnownRoute) return;
 
   e.preventDefault();

@@ -4,16 +4,18 @@
  */
 import '../components/nav.css';
 
+const base = import.meta.env.BASE_URL;
+
 // Links that point to page sections (hash anchors) — NO data-route
 const SECTION_LINKS = [
   {
-    href: '/#features',
+    href: base + '#features',
     label: 'Features',
     sectionId: 'features',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>`,
   },
   {
-    href: '/#download',
+    href: base + '#download',
     label: 'Download',
     sectionId: 'download',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>`,
@@ -23,12 +25,12 @@ const SECTION_LINKS = [
 // Links that navigate to separate routes — keep data-route
 const ROUTE_LINKS = [
   {
-    href: '/rocket-grunt',
+    href: base + 'rocket-grunt',
     label: 'Rocket Grunt',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"/></svg>`,
   },
   {
-    href: '/raids',
+    href: base + 'raids',
     label: 'Raids',
     icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`,
   },
@@ -58,9 +60,9 @@ export function renderNav() {
       <div class="nav-inner">
 
         <!-- Brand -->
-        <a href="/" class="nav-brand" data-route="/" aria-label="PGTools — home">
+        <a href="${base}" class="nav-brand" data-route="${base}" aria-label="PGTools — home">
           <div class="nav-brand-logo">
-            <img src="/favicon.ico" alt="PGTools logo" width="32" height="32" />
+            <img src="${base}favicon.ico" alt="PGTools logo" width="32" height="32" />
           </div>
           <span class="nav-brand-text"><em>PG</em>&thinsp;Tools</span>
         </a>
